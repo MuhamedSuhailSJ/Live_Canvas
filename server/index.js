@@ -9,16 +9,14 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*", // Your React Client URL
+    origin: "*",  
     methods: ["GET", "POST"],
   },
 });
 
-// --- STATE MANAGEMENT ---
-let drawHistory = []; // Stores every stroke: { start, end, color, size }
-let connectedUsers = {}; // Stores { socketId: { color, x, y } }
-
-// Helper: Generate random color for new users
+let drawHistory = []; 
+let connectedUsers = {}; 
+ 
 const getRandomColor = () => {
   const letters = "0123456789ABCDEF";
   let color = "#";
@@ -86,6 +84,8 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(5000, () => {
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
   console.log("SERVER RUNNING ON PORT 5000");
 });
